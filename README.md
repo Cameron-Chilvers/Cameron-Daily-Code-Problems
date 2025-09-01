@@ -1,5 +1,4 @@
-Personal repo that solves the daily problems set out from, for my own learning
-
+Personal Repo for my own learning that solves the daily problems set out from the below website:
 https://www.dailycodingproblem.com/
 
 All commits using:
