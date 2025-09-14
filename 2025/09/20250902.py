@@ -5,7 +5,9 @@
 
 # This problem was asked by Google.
 
-# An XOR linked list is a more memory efficient doubly linked list. Instead of each node holding next and prev fields, it holds a field named both, which is an XOR of the next node and the previous node. Implement an XOR linked list; it has an add(element) which adds the element to the end, and a get(index) which returns the node at index.
+# An XOR linked list is a more memory efficient doubly linked list. Instead of each node holding next and prev fields, it holds a field named both, which is an XOR of the next node and the previous node. 
+# Implement an XOR linked list; 
+# it has an add(element) which adds the element to the end, and a get(index) which returns the node at index.
 
 # If using a language that has no pointers (such as Python), you can assume you have access to get_pointer and dereference_pointer functions that converts between nodes and memory addresses.
 
@@ -15,7 +17,7 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.both = 0
-
+        
     def get_xor_index(self, index):
         return self.both ^ index
 
@@ -62,18 +64,18 @@ class XORLinkedList:
         self.tail_addr = addr
         self.heap[addr] = node
 
-    def traverse_list(self, start, steps, prev) -> Node:
+    def _traverse_list(self, start, steps, prev) -> Node:
         if steps == 0:
             return dereference_pointer(start, self.heap)
 
         start_node = dereference_pointer(start, self.heap)
         xor_value = start_node.get_xor_index(prev)
-        return self.traverse_list(xor_value, steps-1, start)
+        return self._traverse_list(xor_value, steps-1, start)
 
     def get(self, index):
         if index+1 > self.tail_addr:
             raise IndexError
-        return self.traverse_list(self.head_addr, index, 0)
+        return self._traverse_list(self.head_addr, index, 0)
 
 class Test_Problem(unittest.TestCase):
     def setUp(self):
